@@ -8,25 +8,27 @@ const Header = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center space-x-8">
-          <h1 className="text-2xl font-bold text-gray-900">PortfolioCreator</h1>
+          <h1 className="text-2xl font-bold text-gray-900">
+            <a href="/">PortfolioCreator</a>
+          </h1>
           <nav className="hidden md:flex space-x-6">
             <a
-              href="#"
+              href="/"
               className="text-gray-700 hover:text-blue-600 transition-colors"
             >
-              Для вас
+              Главная
             </a>
             <a
-              href="#"
+              href="/projects"
               className="text-gray-700 hover:text-blue-600 transition-colors"
             >
-              Открыть
+              Проекты
             </a>
             <a
-              href="#"
+              href="/profile"
               className="text-gray-700 hover:text-blue-600 transition-colors"
             >
-              Живое
+              Профиль
             </a>
           </nav>
         </div>
@@ -50,7 +52,9 @@ const Header = () => {
             <Bell className="w-5 h-5" />
           </Button>
           <Button variant="ghost" size="icon">
-            <User className="w-5 h-5" />
+            <a href="/settings">
+              <User className="w-5 h-5" />
+            </a>
           </Button>
         </div>
       </div>
