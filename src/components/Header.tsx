@@ -1,8 +1,11 @@
-import { Search, Plus, User, Bell } from "lucide-react";
+import { Search, Plus, User, Bell, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 
 const Header = () => {
+  const cartItemsCount = 3; // Mock данные
+
   return (
     <header className="bg-white border-b border-gray-200 px-6 py-4">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -47,6 +50,19 @@ const Header = () => {
           <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
             <Plus className="w-4 h-4 mr-2" />
             Опубликовать
+          </Button>
+          <Button variant="ghost" size="icon" className="relative">
+            <a href="/cart">
+              <ShoppingCart className="w-5 h-5" />
+              {cartItemsCount > 0 && (
+                <Badge
+                  variant="destructive"
+                  className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center text-xs p-0"
+                >
+                  {cartItemsCount}
+                </Badge>
+              )}
+            </a>
           </Button>
           <Button variant="ghost" size="icon">
             <Bell className="w-5 h-5" />
