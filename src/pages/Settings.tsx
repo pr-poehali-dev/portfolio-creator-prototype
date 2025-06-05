@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Save, Camera, Globe, Lock, Bell, Palette } from "lucide-react";
+import {
+  Camera,
+  Save,
+  Lock,
+  Bell,
+  Palette,
+  CreditCard,
+  ArrowLeft,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -13,7 +21,11 @@ const Settings = () => {
   const [profileData, setProfileData] = useState({
     name: "Анна Иванова",
     email: "anna.ivanova@example.com",
-    bio: "UI/UX дизайнер с 5+ годами опыта",
+    bio: "",
+    cardNumber: "",
+    cardExpiry: "",
+    cardCvv: "",
+    cardHolder: "",
     location: "Москва, Россия",
     website: "https://anna-design.com",
   });
@@ -49,6 +61,7 @@ const Settings = () => {
             <TabsTrigger value="profile">Профиль</TabsTrigger>
             <TabsTrigger value="privacy">Приватность</TabsTrigger>
             <TabsTrigger value="notifications">Уведомления</TabsTrigger>
+            <TabsTrigger value="payment">Оплата</TabsTrigger>
             <TabsTrigger value="appearance">Внешний вид</TabsTrigger>
           </TabsList>
 
@@ -142,6 +155,85 @@ const Settings = () => {
                   <Save className="w-4 h-4 mr-2" />
                   Сохранить изменения
                 </Button>
+              </div>
+            </Card>
+          </TabsContent>
+
+          {/* Payment Settings */}
+          <TabsContent value="payment">
+            <Card className="p-6">
+              <h3 className="text-lg font-semibold mb-6 flex items-center">
+                <CreditCard className="w-5 h-5 mr-2" />
+                Способы оплаты
+              </h3>
+
+              <div className="space-y-6">
+                <div className="space-y-2">
+                  <Label htmlFor="card-number">Номер карты</Label>
+                  <Input
+                    id="card-number"
+                    placeholder="1234 5678 9012 3456"
+                    value={profileData.cardNumber || ""}
+                    onChange={(e) =>
+                      setProfileData({
+                        ...profileData,
+                        cardNumber: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="expiry">Срок действия</Label>
+                    <Input
+                      id="expiry"
+                      placeholder="ММ/ГГ"
+                      value={profileData.cardExpiry || ""}
+                      onChange={(e) =>
+                        setProfileData({
+                          ...profileData,
+                          cardExpiry: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="cvv">CVV</Label>
+                    <Input
+                      id="cvv"
+                      placeholder="123"
+                      value={profileData.cardCvv || ""}
+                      onChange={(e) =>
+                        setProfileData({
+                          ...profileData,
+                          cardCvv: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="cardholder">Имя владельца карты</Label>
+                  <Input
+                    id="cardholder"
+                    value={profileData.cardHolder || ""}
+                    onChange={(e) =>
+                      setProfileData({
+                        ...profileData,
+                        cardHolder: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+
+                <div className="flex justify-end">
+                  <Button>
+                    <Save className="w-4 h-4 mr-2" />
+                    Сохранить способ оплаты
+                  </Button>
+                </div>
               </div>
             </Card>
           </TabsContent>

@@ -4,6 +4,8 @@ import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import QuickCheckoutModal from "@/components/QuickCheckoutModal";
+import CheckoutModal from "@/components/CheckoutModal";
 
 interface CartItem {
   id: string;
@@ -48,6 +50,9 @@ const Cart = () => {
       type: "design",
     },
   ]);
+
+  const [showQuickCheckout, setShowQuickCheckout] = useState(false);
+  const [showCheckout, setShowCheckout] = useState(false);
 
   const updateQuantity = (id: string, newQuantity: number) => {
     if (newQuantity < 1) return;
@@ -222,19 +227,40 @@ const Cart = () => {
                   </div>
                 </div>
 
-                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-lg py-6">
+                <Button
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-lg py-6"
+                  onClick={() => setShowCheckout(true)}
+                >
                   Перейти к оплате
                 </Button>
 
                 <div className="mt-4 text-center">
-                  <Button variant="ghost" asChild>
-                    <a href="/">Продолжить покупки</a>
+                  <Button
+                    variant="outline"
+                    onClick={() => setShowQuickCheckout(true)}
+                  >
+                    Быстрая покупка
                   </Button>
                 </div>
               </Card>
             </div>
           </div>
         )}
+
+        {/* Модальные окна */}
+        <QuickCheckoutModal
+          isOpen={showQuickCheckout}
+          onClose={() => setShowQuickCheckout(false)}
+          cartItems={cartItems}
+          totalAmount={totalAmount}
+        />
+
+        <CheckoutModal
+          isOpen={showCheckout}
+          onClose={() => setShowCheckout(false)}
+          cartItems={cartItems}
+          totalAmount={totalAmount}
+        />
       </div>
     </div>
   );
